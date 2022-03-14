@@ -1,0 +1,91 @@
+version: '3.0'
+
+services:
+  plain-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 4449:4449
+      - 40001:40001
+    cap_add:
+      - NET_ADMIN
+    command: '--proxymode daemon'
+    volumes:
+      - ./myst-data:/var/lib/mysterium-node
+
+  de-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20001:20001
+      - 10001:10001
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20001 --proxymode daemon'
+    volumes:
+      - ./myst-node-de:/var/lib/mysterium-node
+
+  lt-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20002:20002
+      - 10002:10002
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20002 --proxymode daemon'
+    volumes:
+      - ./myst-node-lt:/var/lib/mysterium-node
+
+  ua-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20003:20003
+      - 10003:10003
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20003 --proxymode daemon'
+    volumes:
+      - ./myst-node-ua:/var/lib/mysterium-node
+
+  uk-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20004:20004
+      - 10004:10004
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20004 --proxymode daemon'
+    volumes:
+      - ./myst-node-uk:/var/lib/mysterium-node
+
+  jp-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20005:20005
+      - 10005:10005
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20005 --proxymode daemon'
+    volumes:
+      - ./myst-node-jp:/var/lib/mysterium-node
+
+  us-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20006:20006
+      - 10006:10006
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20006 --proxymode daemon'
+    volumes:
+      - ./myst-node-us:/var/lib/mysterium-node
+
+  fleet:
+    image: tianon/true
+    restart: 'no'
+    depends_on:
+      - plain-node
+      - de-node
+      - lt-node
+      - ua-node
+      - uk-node
+      - jp-node
+      - us-node

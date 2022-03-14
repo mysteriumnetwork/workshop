@@ -1,0 +1,30 @@
+{
+  "name": "scraping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "booking": "ts-node src/booking.ts",
+    "booking-fleet": "ts-node src/bookingFleet.ts",
+
+    "fleet-start": "docker-compose up fleet",
+    "fleet-stop": "docker-compose down",
+    "fleet-restart": "yarn fleet-stop && yarn fleet-start",
+    "fleet-info": "ts-node src/fleet/info.ts",
+    "fleet-connect": "ts-node src/fleet/connect.ts",
+    "fleet-disconnect": "ts-node src/fleet/disconnect.ts",
+
+    "fix": "prettier --write src/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.21",
+    "mysterium-vpn-js": "^19.3.0",
+    "prettier": "^2.5.1",
+    "puppeteer": "^13.4.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}
