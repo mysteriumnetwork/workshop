@@ -1,6 +1,5 @@
-import { TequilapiClient } from 'mysterium-vpn-js';
+import { TequilapiClient, Identity, IdentityRegistrationStatus } from 'mysterium-vpn-js';
 import { TequilapiClientFactory } from 'mysterium-vpn-js/lib/tequilapi-client-factory';
-import { Identity, IdentityRegistrationStatus } from 'mysterium-vpn-js/lib';
 
 export interface QuickConnectOptions {
     proxyPort: number;
