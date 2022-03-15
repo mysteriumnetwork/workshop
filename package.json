@@ -6,14 +6,13 @@
   "scripts": {
     "booking": "ts-node src/booking.ts",
     "booking-fleet": "ts-node src/bookingFleet.ts",
-
+    "google-fleet": "ts-node src/googleFleet.ts",
     "fleet-start": "docker-compose up fleet",
     "fleet-stop": "docker-compose down",
     "fleet-restart": "yarn fleet-stop && yarn fleet-start",
     "fleet-info": "ts-node src/fleet/info.ts",
     "fleet-connect": "ts-node src/fleet/connect.ts",
     "fleet-disconnect": "ts-node src/fleet/disconnect.ts",
-
     "fix": "prettier --write src/"
   },
   "keywords": [],

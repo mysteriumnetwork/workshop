@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+import puppeteer, { Page } from 'puppeteer';
 import { sleep } from './common';
 import { COUNTRIES, NODES } from './config';
 import { newUniqueDir } from './dir';
@@ -8,11 +8,14 @@ export interface CrawlConfig {
     scenario: string;
     url: string;
     waitBeforeShootSeconds: number;
+    doBeforeShoot?: (page: Page) => Promise<void> | void
+    countries?: string[]
 }
 
 const visitAndShoot = async (config: CrawlConfig) => {
     const workdir = await newUniqueDir(`${config.scenario}_`);
-    await Promise.all(COUNTRIES.map(country => visitWebAndScreenShoot(workdir, country, config)));
+    const crawlCountries = config.countries || COUNTRIES
+    await Promise.all(crawlCountries.map(country => visitWebAndScreenShoot(workdir, country, config)));
 };
 
 const visitWebAndScreenShoot = async (workdir: string, country: string, config: CrawlConfig) => {
@@ -28,6 +31,10 @@ const visitWebAndScreenShoot = async (workdir: string, country: string, config: 
         await page.goto(config.url);
         // page might still bea loading even if DOM is ready, let's give it some time
         await sleep(config.waitBeforeShootSeconds);
+
+        if (config.doBeforeShoot) {
+            await config.doBeforeShoot(page)
+        }
 
         await page.screenshot(shots.success(workdir, country));
     } catch (err: any) {

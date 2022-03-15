@@ -48,6 +48,7 @@ Will print out each node balance in MYST - 0 balance means that node will not be
 
 - `yarn booking` - will run a scraping using single node (slow but simple setup)
 - `yarn booking-fleet` - will run scraping use case on multiple nodes at once (fast but more complex setup)
+- `yarn google-fleet` - fst crawl google search
 
 ## Fleet commands
 
