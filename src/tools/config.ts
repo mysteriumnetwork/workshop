@@ -24,6 +24,10 @@ export const NODES: { [key: string]: { proxyPort: number; tequilaPort: number } 
         proxyPort: 10006,
         tequilaPort: 20006,
     },
+    CA: {
+        proxyPort: 10007,
+        tequilaPort: 20007,
+    },
 };
 
 export const COUNTRIES = Object.keys(NODES);

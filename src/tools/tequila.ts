@@ -57,7 +57,7 @@ export class NodeClient {
             }
             retries -= 1;
             if (retries === 0) {
-                return
+                return;
             }
         }
         console.log(`could not quick connect to ${country}`);

@@ -78,6 +78,17 @@ services:
     volumes:
       - ./myst-node-us:/var/lib/mysterium-node
 
+  ca-node:
+    image: mysteriumnetwork/myst:latest
+    ports:
+      - 20007:20007
+      - 10007:10007
+    cap_add:
+      - NET_ADMIN
+    command: '--ui.port=20007 --proxymode daemon'
+    volumes:
+      - ./myst-node-ca:/var/lib/mysterium-node
+
   fleet:
     image: tianon/true
     restart: 'no'
@@ -89,3 +100,4 @@ services:
       - uk-node
       - jp-node
       - us-node
+      - ca-node

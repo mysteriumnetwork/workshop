@@ -28,6 +28,7 @@ http://localhost:20003
 http://localhost:20004  
 http://localhost:20005  
 http://localhost:20006  
+http://localhost:20007  
 
 3) After all nodes have been registered you need to instruct each one to connect to respective country
 

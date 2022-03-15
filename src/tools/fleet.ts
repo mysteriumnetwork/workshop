@@ -45,11 +45,9 @@ export class Fleet {
     public async disconnect() {
         for (const { client, country } of this.fleet) {
             try {
-                await client.disconnectVPN()
-                console.log(`Disconnected from ${country}`)
-            } catch (ignored: any) {
-
-            }
+                await client.disconnectVPN();
+                console.log(`Disconnected from ${country}`);
+            } catch (ignored: any) {}
         }
     }
 }
