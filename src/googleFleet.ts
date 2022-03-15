@@ -1,15 +1,15 @@
-import { sleep } from "./tools/common";
+import { sleep } from './tools/common';
 import crawl from './tools/crawl';
 
 const CRAWL_URL = 'https://www.google.com/search?q=bank';
 
-const acceptCookies = async (page) => {
-    const acceptCookieButton = await page.$('#L2AGLb')
+const acceptCookies = async (page: any) => {
+    const acceptCookieButton = await page.$('#L2AGLb');
     if (acceptCookieButton) {
-        await acceptCookieButton.click()
-        await sleep(5)
+        await acceptCookieButton.click();
+        await sleep(5);
     }
-}
+};
 
 (async () => {
     await crawl.visitAndShoot({
