@@ -8,13 +8,13 @@ export interface CrawlConfig {
     scenario: string;
     url: string;
     waitBeforeShootSeconds: number;
-    doBeforeShoot?: (page: Page) => Promise<void> | void
-    countries?: string[]
+    doBeforeShoot?: (page: Page) => Promise<void> | void;
+    countries?: string[];
 }
 
 const visitAndShoot = async (config: CrawlConfig) => {
     const workdir = await newUniqueDir(`${config.scenario}_`);
-    const crawlCountries = config.countries || COUNTRIES
+    const crawlCountries = config.countries || COUNTRIES;
     await Promise.all(crawlCountries.map(country => visitWebAndScreenShoot(workdir, country, config)));
 };
 
@@ -33,7 +33,7 @@ const visitWebAndScreenShoot = async (workdir: string, country: string, config: 
         await sleep(config.waitBeforeShootSeconds);
 
         if (config.doBeforeShoot) {
-            await config.doBeforeShoot(page)
+            await config.doBeforeShoot(page);
         }
 
         await page.screenshot(shots.success(workdir, country));
