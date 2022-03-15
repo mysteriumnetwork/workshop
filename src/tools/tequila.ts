@@ -33,7 +33,7 @@ export class NodeClient {
     public async quickConnectTo(country: string, options: QuickConnectOptions) {
         await this.cancelConnection(options.proxyPort);
 
-        const proposals = await this.api.findProposals({ locationCountry: country, ipType: 'residential' });
+        const proposals = await this.api.findProposals({ locationCountry: country, ipType: 'residential', qualityMin: 1.0 });
 
         if (proposals.length === 0) {
             console.log(`no proposals found for country ${country}; skipping...`);
