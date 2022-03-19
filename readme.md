@@ -20,8 +20,11 @@ yarn fleet-start
 
 2) After launching all nodes, you need to register each individual node by navigating to NodeUI and completing on-boarding:  
 > Make sure to set your password to `qwerty123456` - all scripts will expect this
+
+- For single node use case:  
+http://localhost:44449  
   
-http://localhost:4449  
+- Node fleet use case:  
 http://localhost:20001  
 http://localhost:20002  
 http://localhost:20003  
@@ -48,7 +51,8 @@ Will print out each node balance in MYST - 0 balance means that node will not be
 
 - `yarn booking` - will run a scraping using single node (slow but simple setup)
 - `yarn booking-fleet` - will run scraping use case on multiple nodes at once (fast but more complex setup)
-- `yarn google-fleet` - fst crawl google search
+- `yarn google-fleet` - fast crawl google search
+- `yarn hotels-fleet` - fast crawl hotels.com
 
 ## Fleet commands
 

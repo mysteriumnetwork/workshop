@@ -1,8 +1,8 @@
 import puppeteer, { Page } from 'puppeteer';
-import { sleep } from './common';
+import { wait } from './common';
 import { COUNTRIES, NODES } from './config';
 import { newUniqueDir } from './dir';
-import shots from './screenshots';
+import { toFile } from './screenshots';
 
 export interface CrawlConfig {
     scenario: string;
@@ -20,31 +20,32 @@ const visitAndShoot = async (config: CrawlConfig) => {
 
 const visitWebAndScreenShoot = async (workdir: string, country: string, config: CrawlConfig) => {
     const { proxyPort } = NODES[country];
-    const browser = await puppeteer.launch({
-        headless: false, // headless mode introduces unexpected behaviour
-        defaultViewport: { width: 2560, height: 1440 },
-        args: [`--proxy-server=http://localhost:${proxyPort}`],
-    });
+    const { url, waitBeforeShootSeconds, doBeforeShoot } = config;
+
+    const browser = await puppeteer.launch(browserOptions(proxyPort));
     const page = await browser.newPage();
 
     try {
-        await page.goto(config.url);
+        await page.goto(url);
+
         // page might still bea loading even if DOM is ready, let's give it some time
-        await sleep(config.waitBeforeShootSeconds);
+        await wait(waitBeforeShootSeconds);
 
-        if (config.doBeforeShoot) {
-            await config.doBeforeShoot(page);
+        if (doBeforeShoot) {
+            await doBeforeShoot(page);
         }
-
-        await page.screenshot(shots.success(workdir, country));
-    } catch (err: any) {
-        await page.screenshot(shots.error(workdir, country));
-        console.log('error:', err);
+    } finally {
+        await page.screenshot(toFile(workdir, country));
     }
 
-    await browser.close();
-    return Promise.resolve();
+    return browser.close();
 };
+
+const browserOptions = (proxyPort: number) => ({
+    headless: false, // headless mode introduces unexpected behaviour
+    defaultViewport: { width: 2560, height: 1440 },
+    args: [`--proxy-server=http://localhost:${proxyPort}`],
+});
 
 const crawl = {
     visitAndShoot,

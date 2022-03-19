@@ -4,11 +4,11 @@ services:
   plain-node:
     image: mysteriumnetwork/myst:latest
     ports:
-      - 4449:4449
+      - 44449:44449
       - 40001:40001
     cap_add:
       - NET_ADMIN
-    command: '--proxymode daemon'
+    command: '--ui.port=44449 --proxymode daemon'
     volumes:
       - ./myst-data:/var/lib/mysterium-node
 

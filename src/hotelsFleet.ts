@@ -1,10 +1,10 @@
-import { BOOKING_CRAWL_URL } from './constants';
+import { HOTELS_CRAWL_URL } from './constants';
 import crawl from './tools/crawl';
 
 (async () => {
     await crawl.visitAndShoot({
-        scenario: 'booking_fleet',
-        url: BOOKING_CRAWL_URL,
+        scenario: 'hotels',
+        url: HOTELS_CRAWL_URL,
         waitBeforeShootSeconds: 7,
     });
 })();

@@ -7,6 +7,9 @@
     "booking": "ts-node src/booking.ts",
     "booking-fleet": "ts-node src/bookingFleet.ts",
     "google-fleet": "ts-node src/googleFleet.ts",
+    "hotels-fleet": "ts-node src/hotelsFleet.ts",
+    "youtube-fleet": "ts-node src/youtubeFleet.ts",
+
     "fleet-start": "docker-compose up fleet",
     "fleet-stop": "docker-compose down",
     "fleet-restart": "yarn fleet-stop && yarn fleet-start",

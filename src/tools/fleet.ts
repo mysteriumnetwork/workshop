@@ -1,5 +1,6 @@
+import { log } from './common';
 import { COUNTRIES, NODES } from './config';
-import { NodeClient } from './tequila';
+import { buildNodeClient, NodeClient } from './tequila';
 
 export interface Node {
     country: string;
@@ -11,7 +12,7 @@ export const buildFleet = async () => {
     const fleet: Node[] = [];
     for (const country of COUNTRIES) {
         const { proxyPort, tequilaPort } = NODES[country];
-        const client = await new NodeClient(tequilaPort).build();
+        const client = await buildNodeClient(tequilaPort);
         fleet.push({ client, proxyPort, country });
     }
     return new Fleet(fleet);
@@ -27,7 +28,7 @@ export class Fleet {
     public async printBalances() {
         for (const { client, country } of this.fleet) {
             const id = await client.info();
-            console.log(`${country} - balance:\t${id.balanceTokens.human}`);
+            log(`${country} - balance:\t${id.balanceTokens.human}`);
         }
     }
 
@@ -45,8 +46,8 @@ export class Fleet {
     public async disconnect() {
         for (const { client, country } of this.fleet) {
             try {
-                await client.disconnectVPN();
-                console.log(`Disconnected from ${country}`);
+                await client.cancelConnection();
+                log(`Disconnected from ${country}`);
             } catch (ignored: any) {}
         }
     }
