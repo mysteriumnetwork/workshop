@@ -18,7 +18,11 @@ or
 yarn fleet-start
 ```
 
-2) After launching all nodes, you need to register each individual node by navigating to NodeUI and completing on-boarding:  
+2) After launching all nodes, you need to register each individual node by navigating to NodeUI and completing on-boarding:
+
+**Attention**: you **must** use "Deposit x.x MYST" payment option for this. Transfer **double** the amount which is asked the un-used amount will be then deposited to you **balance**.  
+**PayPal** or **Credit** Card registration will not yield you any balance afterwards.
+
 > Make sure to set your password to `qwerty123456` - all scripts will expect this
 
 - For single node use case:  
